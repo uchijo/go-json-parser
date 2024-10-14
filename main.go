@@ -43,26 +43,22 @@ func takeString(input []Token) (string, []Token, error) {
 	return input[0].String(), input[1:], nil
 }
 
-func parseObjectEntry(input []Token) ([]Token, string, interface{}, error) {
-	
-}
-
-func parseObject(input []Token) (map[string]interface{}, []Token, error) {
-	tokens, err := consumeControl(input, '{')
-	retval := map[string]interface{}{}
-	if err != nil {
-		panic("something went wrong")
-	}
-	for tokens[0].Type == CONTROL && tokens[0].Content == "}" {
-		tokensLeft, key, val, err := parseObjectEntry(input)
-		tokens = tokensLeft
-		if err != nil {
-			panic("something went wrong")
-		}
-		retval[key] = val
-	}
-	return retval, tokens, nil
-}
+// func parseObject(input []Token) (map[string]interface{}, []Token, error) {
+// 	tokens, err := consumeControl(input, '{')
+// 	retval := map[string]interface{}{}
+// 	if err != nil {
+// 		panic("something went wrong")
+// 	}
+// 	for tokens[0].Type == CONTROL && tokens[0].Content == "}" {
+// 		tokensLeft, key, val, err := parseObjectEntry(input)
+// 		tokens = tokensLeft
+// 		if err != nil {
+// 			panic("something went wrong")
+// 		}
+// 		retval[key] = val
+// 	}
+// 	return retval, tokens, nil
+// }
 
 type TokenType int
 
@@ -155,5 +151,6 @@ func isControl(c rune) bool {
 		c == ',' ||
 		c == '[' ||
 		c == ']' ||
-		c == '"'
+		c == '"' ||
+		c == ':'
 }
